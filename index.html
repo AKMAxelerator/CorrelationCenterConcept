@@ -15,12 +15,19 @@
         <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
         <!-- <script src=bootstrap.min.js"></script> -->
         
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-        
         <link rel="stylesheet" href="chains.css">
         
-        <script src="URI.js"></script>
+        <style type="text/css">
+          body
+          {
+            overflow: hidden;
+          }
+        </style>
         
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        
+        <script src="URI.js"></script>
+
         <script type="text/javascript">
             $(function() {
               reload();
@@ -32,19 +39,12 @@
             
             function reload()
             {
-                $("#news").addClass("hidden");
-                $("#offers").addClass("hidden");
-                $("#messages").addClass("hidden");
-                $("#chains").addClass("hidden");
-                
-                $("#newslink").removeClass("active");
-                $("#messageslink").removeClass("active");
-                $("#offerslink").removeClass("active");
-                $("#chainslink").removeClass("active");
-                
-                var uri = new URI();
-                $(uri.hash()).removeClass("hidden");
-                $(uri.hash() + "link").addClass("active");
+              $(".section").addClass("hidden");
+              $(".section-link").removeClass("active");
+              
+              var uri = new URI();
+              $(uri.hash()).removeClass("hidden");
+              $(uri.hash() + "link").addClass("active");
             }
         </script>
     </head>
@@ -65,10 +65,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li id="newslink"><a href="#news">Новости</a></li>
-                <li id="messageslink"><a href="#messages">Сообщения</a></li>
-                <li id="offerslink"><a href="#offers">Предложения</a></li>
-                <li id="chainslink"><a href="#chains">Цепи</a></li>
+                <li id="newslink" class="section-link"><a href="#news">Новости</a></li>
+                <li id="messageslink" class="section-link"><a href="#messages">Сообщения</a></li>
+                <li id="offerslink" class="section-link"><a href="#offers">Предложения</a></li>
+                <li id="chainslink" class="section-link"><a href="#chains">Цепи</a></li>
                 <!--
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -106,48 +106,42 @@
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
-       
-       <div id="news" class="hidden">
+        
+        
+        
+        <!-- Site sections -->
+        <div id="main" class="section hidden">
+        </div>
+        <div id="news" class="section hidden">
             <div class="page-header">
               <h1>Новости</h1>
             </div>
             
             Секция новостей.
-       </div>
-       
-       <div id="messages" class="hidden">
+        </div>
+        <div id="messages" class="section hidden">
             <div class="page-header">
               <h1>Сообщения</h1>
             </div>
             
             Секция сообщений.
-       </div>
-       
-        <div id="offers" class="hidden">
+        </div>
+        <div id="offers" class="section hidden">
             <div class="page-header">
               <h1>Предложения</h1>
             </div>
             
             Секция предложений.
-       </div>
-       
-       
-        <div id="chains" class="hidden">
-            <div class="page-header">
-              <h1>Цепочки</h1>
-            </div>
-            
-            <div class="row">
-              <div class="col-md-6">
-                <div id="chart"></div>
-    
-                <script src="http://d3js.org/d3.v3.min.js"></script>
-                <script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
-                <script src="chains.js"></script>
-              
-              </div>
-              <div class="col-md-6">&nbsp;</div>
-            </div>
-       </div>
-    </bodY>
+        </div>
+        <div id="chains" class="section hidden">
+
+          <div id="chart"></div>
+          
+          <script src="http://d3js.org/d3.v3.min.js"></script>
+          <script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
+          <script src="chains.js"></script>
+
+        </div>
+        <!-- Site sections -->
+    </body>
 </html>
