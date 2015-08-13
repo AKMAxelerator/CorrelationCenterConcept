@@ -4,11 +4,10 @@ function chains()
 {
   var svg, tooltip, biHiSankey, path, defs, colorScale, highlightColorScale, isTransitioning;
   
-  var jWindow = $(window);
-  var jContainer = $("#chart");
-  var jNavigation = $(".navbar.navbar-default");
-  
-  jContainer.find("svg").remove();
+  // Remove previous rendered svg
+  $("#chart").find("svg").remove();
+  // Remove previous tooltips
+  $("#chart").find("div").remove();
 
   var OPACITY = {
       NODE_DEFAULT: 0.9,
@@ -37,8 +36,8 @@ function chains()
       LEFT: OUTER_MARGIN
     },
     TRANSITION_DURATION = 400,
-    HEIGHT = jWindow.innerHeight() - jNavigation.outerHeight(true) - MARGIN.TOP - MARGIN.BOTTOM,
-    WIDTH = jWindow.innerWidth() - MARGIN.LEFT - MARGIN.RIGHT,
+    HEIGHT = getSectionHeight() - MARGIN.TOP - MARGIN.BOTTOM,
+    WIDTH = getSectionWidth() - MARGIN.LEFT - MARGIN.RIGHT,
     LAYOUT_INTERATIONS = 32,
     REFRESH_INTERVAL = 7000;
   
@@ -146,6 +145,7 @@ function chains()
     .attr("orient", "auto")
     .append("path")
       .attr("d", "M 0 0 L 1 0 L 6 5 L 1 10 L 0 10 z");
+  
   
   function update () {
     var link, linkEnter, node, nodeEnter, collapser, collapserEnter;
@@ -506,7 +506,6 @@ function chains()
     });
   
     collapser.exit().remove();
-  
   }
   
   /*
@@ -603,7 +602,6 @@ function chains()
     {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)}
   ]*/
   
-  /*
   var exampleNodes = [
     {"type":"Поле","id":"1","parent":null,"name":"Поле"},
     
@@ -618,41 +616,69 @@ function chains()
   ]
   
   var exampleLinks = [
-    {"source":1, "target":3, "value":Math.floor(Math.random() * 100)},
-    {"source":3, "target":2, "value":Math.floor(Math.random() * 100)},
-    {"source":4, "target":2, "value":Math.floor(Math.random() * 100)},
-    {"source":6, "target":5, "value":Math.floor(Math.random() * 100)},
-    {"source":2, "target":5, "value":Math.floor(Math.random() * 100)},
-    {"source":1, "target":2, "value":Math.floor(Math.random() * 100)},
-    {"source":5, "target":7, "value":Math.floor(Math.random() * 100)},
-  ]*/
+    {"source":1, "target":3, "value":100},
+    {"source":3, "target":2, "value":100},
+    {"source":4, "target":2, "value":100},
+    {"source":6, "target":5, "value":100},
+    {"source":2, "target":5, "value":100},
+    {"source":1, "target":2, "value":100},
+    {"source":5, "target":7, "value":100},
+  ]
   
+  /*
   var exampleNodes = [
     {"type":"Планета Земля","id":"1","parent":null,"name":"Планета Земля"},
     {"type":"Ресурсы планеты","id":"pm","parent":null,"name":"Ресурсы планеты"},
-    {"type":"Ресурсы планеты","id":"2","parent":"pm","name":"Исчерпаемые"},
-    {"type":"Ресурсы планеты","id":"3","parent":"pm","name":"Неисчерпаемые"},
-    {"type":"Ресурсы планеты","id":"pmn","parent":"pm","name":"Невозобновимые"},
-    {"type":"Ресурсы планеты","id":"5","parent":"pm","name":"Относительно возобновимые"},
-    {"type":"Ресурсы планеты","id":"6","parent":"pm","name":"Возобновимые"},
-    {"type":"Ресурсы планеты","id":"10","parent":"pmn","name":"Невозобновимые"},
-    {"type":"Ресурсы планеты","id":"8","parent":"pmn","name":"Полезные ископаемые"},
-    {"type":"Ресурсы планеты","id":"9","parent":"pmn","name":"Руда"},
-    {"type":"Космос","id":"7","parent":null,"name":"Колонизация космоса"}
-    
+      {"type":"Ресурсы планеты","id":"nei","parent":"pm","name":"Неисчерпаемые"},
+        {"type":"Ресурсы планеты","id":"3","parent":"nei","name":"Неисчерпаемые"},
+        {"type":"Ресурсы планеты","id":"18","parent":"nei","name":"Воды мирового океана"},
+        {"type":"Ресурсы планеты","id":"19","parent":"nei","name":"Атмосферный воздух"},
+        {"type":"Ресурсы планеты","id":"20","parent":"nei","name":"Энергия земных недр"},
+        {"type":"Ресурсы планеты","id":"21","parent":"nei","name":"Энергия ветра"},
+        {"type":"Ресурсы планеты","id":"22","parent":"nei","name":"Энергия морских приливов и отливов"},
+        {"type":"Ресурсы планеты","id":"23","parent":"nei","name":"Солнечная энергия"},
+      {"type":"Ресурсы планеты","id":"is","parent":"pm","name":"Исчерпаемые"},
+        {"type":"Ресурсы планеты","id":"2","parent":"is","name":"Исчерпаемые"},
+        {"type":"Ресурсы планеты","id":"pmn","parent":"is","name":"Невозобновимые"},
+          {"type":"Ресурсы планеты","id":"10","parent":"pmn","name":"Невозобновимые"},
+          {"type":"Ресурсы планеты","id":"8","parent":"pmn","name":"Полезные ископаемые"},
+          {"type":"Ресурсы планеты","id":"9","parent":"pmn","name":"Руда"},
+        {"type":"Ресурсы планеты","id":"pmv","parent":"is","name":"Относительно возобновимые"},
+          {"type":"Ресурсы планеты","id":"11","parent":"pmv","name":"Относительно возобновимые"},
+          {"type":"Ресурсы планеты","id":"12","parent":"pmv","name":"Лесные ресурсы"},
+          {"type":"Ресурсы планеты","id":"13","parent":"pmv","name":"Плодородные почвы"},
+          {"type":"Ресурсы планеты","id":"14","parent":"pmv","name":"Некоторые виды минерального сырья"},
+        {"type":"Ресурсы планеты","id":"voz","parent":"is","name":"Возобновимые"},
+          {"type":"Ресурсы планеты","id":"6","parent":"voz","name":"Возобновимые"},
+          {"type":"Ресурсы планеты","id":"15","parent":"voz","name":"Ростительный мир"},
+          {"type":"Ресурсы планеты","id":"16","parent":"voz","name":"Животный мир"},
+          {"type":"Ресурсы планеты","id":"17","parent":"voz","name":"Пресная вода"},
+
+    {"type":"Космос","id":"7","parent":null,"name":"Колонизация космоса"},
   ]
   
   var exampleLinks = [
     {"source":1, "target":2,  "value":100},
     {"source":1, "target":3, "value": 100},
     {"source":2, "target":10, "value":100},
-    {"source":2, "target":5, "value": 100},
+    {"source":2, "target":11, "value": 100},
     {"source":2, "target":6, "value": 100},
     {"source":1, "target":7, "value": 100},
     {"source":10, "target":8, "value":100},
     {"source":8, "target":9, "value": 100},
-    
-  ]
+    {"source":11, "target":12,  "value":100},
+    {"source":11, "target":13,  "value":100},
+    {"source":11, "target":14,  "value":100},
+    {"source":6, "target":15,  "value":100},
+    {"source":6, "target":16,  "value":100},
+    {"source":6, "target":17,  "value":100},
+    {"source":3, "target":18,  "value":100},
+    {"source":3, "target":19,  "value":100},
+    {"source":3, "target":20,  "value":100},
+    {"source":3, "target":21,  "value":100},
+    {"source":3, "target":22,  "value":100},
+    {"source":3, "target":23,  "value":100},
+  ]*/
   
   biHiSankey
     .nodes(exampleNodes)
@@ -668,5 +694,3 @@ function chains()
 };
 
 window.onresize = chains();
-
-chains();

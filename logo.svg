@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
+   width="348"
+   height="216"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <g
+     style="opacity:1;display:inline"
+     id="layer2">
+    <rect
+       width="348"
+       height="216"
+       x="0"
+       y="836.36218"
+       transform="translate(0,-836.36218)"
+       style="opacity:1;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.00000024;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3179" />
+    <path
+       d="M 0,0 L 0,216 L 113.15625,216 C 145.51296,146.57765 144.87,67.600057 114.8125,0 L 0,0 z "
+       style="opacity:1;color:#000000;fill:#ffff00;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.00000024;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="rect3202" />
+    <path
+       d="M 121.21627,193.96413 A 95.449303,95.449303 0 1 1 121.33772,194.05007"
+       transform="translate(-4.8281751,-6.9811342)"
+       style="opacity:1;color:#000000;fill:#3399ff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.00000024;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path2192" />
+    <path
+       d="M 282.12435,194.52841 A 27.854856,27.854856 0 1 1 282.15979,194.55349"
+       transform="matrix(1.0133339,0,0,1.0133339,-2.1196069,-1.17662)"
+       style="opacity:1;color:#000000;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.00000024;stroke-linecap:butt;stroke-linejoin:miter;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
+       id="path3169" />
+  </g>
+</svg>

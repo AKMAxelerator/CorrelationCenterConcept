@@ -5,7 +5,8 @@
 
 .node text {
   pointer-events: none;
-  text-shadow: 1px 1px 2px #fff;
+  fill: #FFF;
+  text-shadow: 1px 1px 2px #000;
   font-size: 0.8em;
   font-family: sans-serif;
 }
