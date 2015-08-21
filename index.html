@@ -14,15 +14,21 @@
         <link rel="stylesheet" href="bootstrap-theme.min.css">
         
         <link rel="stylesheet" href="chains.css">
+        <link rel="stylesheet" href="jsoneditor/jsoneditor.css">
         
         <style type="text/css">
           body { overflow: hidden; }
         </style>
 
-        <script src="URI.js"></script>
-        <script src="moment-with-locales.min.js"></script>        
+        <script src="underscore-min.js"></script>
         <script src="jquery-2.1.4.min.js"></script>
+        <script src="URI.js"></script>
+        <script src="moment-with-locales.min.js"></script>
         <script src="bootstrap.min.js"></script>
+        
+        <script src="jsoneditor/jsoneditor.js"></script>
+        
+        <script src="storage.js"></script>
 
         <script type="text/javascript">
             $(function() {
@@ -41,33 +47,28 @@
             
             function reload()
             {
-              any();
+              // Any section
+              $(".section").addClass("hidden");
+              $(".section-link").removeClass("active");
+              $("body").css("background-color", "#222");
               
               var uri = new URI();
               var hash = uri.hash();
               $(hash).removeClass("hidden");
               $(hash + "link").addClass("active");
               
+              // Per section
               if(hash == "#chains")
                 chains();
                 
+              //if(hash == "#jsoneditor")
+              //  ();
+                
               if(hash == "")
               {
-                main();
+                spacetime();
                 $("#main").removeClass("hidden");
               }
-            }
-            
-            function main()
-            {
-              spacetime();
-            }
-            
-            function any()
-            {
-              $(".section").addClass("hidden");
-              $(".section-link").removeClass("active");
-              $("body").css("background-color", "#222");
             }
             
             function getSectionHeight()
@@ -99,7 +100,8 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li id="chainslink" class="section-link"><a href="#chains">Цепи</a></li> 
+                <li id="chainslink" class="section-link"><a href="#chains">Цепи</a></li>
+                <li id="jsoneditorlink" class="section-link"><a href="#jsoneditor">Редактор</a></li> 
               </ul>
             </div>
           </div>
@@ -117,6 +119,42 @@
           <script src="bihisankey.js"></script>
           <script src="chains.js"></script>
 
+        </div>
+        <div id="jsoneditor" class="section hidden">
+          <div id="json-editor-container"></div>
+          
+          <!-- <div class="row">
+            <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="left-json-editor-container"></div>
+            <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="right-json-editor-container"></div>
+          </div> -->
+          <script>
+            var editor;
+          
+            var options = {
+              mode: 'tree',
+              modes: ['tree', 'form', 'view', 'text'], // allowed modes ('code' не работает, разобраться, почему)
+              error: function (err) { console.dir(err); },
+              change: function () {
+                json = editor.get(json);
+                copyDefaultChainToChain(json);
+              }
+            };
+          
+            //var leftContainer = document.getElementById('left-json-editor-container');
+            //var rightContainer = document.getElementById('right-json-editor-container');
+            var container = document.getElementById('json-editor-container');
+            
+            $(container).css("background-color", "#FFFFFF");
+            $(container).css("width", getSectionWidth());
+            $(container).css("height", getSectionHeight());
+          
+            var json = copyDefaultChainFromStorage();
+          
+            //var leftEditor = new JSONEditor(leftContainer, options, json);
+            //var rightEditor = new JSONEditor(rightContainer, options, json);
+            editor = new JSONEditor(container, options, json);
+          </script>
+          
         </div>
         <!-- Site sections -->
     </body>

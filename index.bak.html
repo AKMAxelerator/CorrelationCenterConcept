@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+
+        <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- <link rel="stylesheet" href="bootstrap.min.css"> -->
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <!-- <link rel="stylesheet" href="bootstrap-theme.min.css"> -->
+        
+        <link rel="stylesheet" href="chains.css">
+        
+        <style type="text/css">
+          body
+          {
+            overflow: hidden;
+          }
+        </style>
+        
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        
+        <script src="URI.js"></script>
+        <script src="spacetime.js"></script>
+        <script src="moment-with-locales.min.js"></script>
+        
+        
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- <script src=bootstrap.min.js"></script> -->
+
+        <script type="text/javascript">
+            $(function() {
+              moment.locale(navigator.language);
+              
+              reload();
+              
+              $(window).on('hashchange', function() {
+                reload();
+              });
+              
+              $(window).resize(function() {
+                reload();
+              });
+            });
+            
+            function reload()
+            {
+              any();
+              
+              var uri = new URI();
+              var hash = uri.hash();
+              $(hash).removeClass("hidden");
+              $(hash + "link").addClass("active");
+              
+              if(hash == "#chains")
+                chains();
+                
+              if(hash == "")
+              {
+                main();
+                $("#main").removeClass("hidden");
+              }
+            }
+            
+            function main()
+            {
+              $("body").css("background-color", "#222");
+              spacetime();
+            }
+            
+            function any()
+            {
+              $(".section").addClass("hidden");
+              $(".section-link").removeClass("active");
+              $("body").css("background-color", "#FFF");
+            }
+            
+            function getSectionHeight()
+            {
+              return $(window).innerHeight() - $(".navbar.navbar-default").outerHeight(true);
+            }
+            
+            function getSectionWidth()
+            {
+              return $(window).innerWidth();
+            }
+        </script>
+    </head>
+    <body>
+       <nav class="navbar navbar-inverse">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Ресурсы</a>
+            </div>
+        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <!--
+                <li id="newslink" class="section-link"><a href="#news">Новости</a></li>
+                <li id="messageslink" class="section-link"><a href="#messages">Сообщения</a></li>
+                <li id="offerslink" class="section-link"><a href="#offers">Предложения</a></li> -->
+                <li id="chainslink" class="section-link"><a href="#chains">Цепи</a></li> 
+                
+<!--
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">One more separated link</a></li>
+                  </ul>
+                </li> -->
+              </ul>
+              <!--
+              <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form> -->
+              <ul class="nav navbar-nav navbar-right">
+                <!-- <li><a href="#">FAQ</a></li> -->
+                <!-- <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Action</a></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Separated link</a></li>
+                  </ul>
+                </li> -->
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+        
+        <!-- Site sections -->
+        <div id="main" class="section hidden">
+        </div>
+        
+        <!--
+        <div id="news" class="section hidden">
+            <div class="page-header">
+              <h1>Новости</h1>
+            </div>
+            
+            Секция новостей.
+        </div>
+        <div id="messages" class="section hidden">
+            <div class="page-header">
+              <h1>Сообщения</h1>
+            </div>
+            
+            Секция сообщений.
+        </div>
+        <div id="offers" class="section hidden">
+            <div class="page-header">
+              <h1>Предложения</h1>
+            </div>
+            
+            Секция предложений.
+        </div>
+        -->
+        <div id="chains" class="section hidden">
+
+          <div id="chart"></div>
+          
+          <script src="http://d3js.org/d3.v3.min.js"></script>
+          <script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
+          <script src="chains.js"></script>
+
+        </div>
+        <!-- Site sections -->
+    </body>
+</html>

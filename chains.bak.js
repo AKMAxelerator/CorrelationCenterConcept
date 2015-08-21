@@ -1,9 +1,44 @@
 'use strict';
 
-function chains()
+var defaultChain = 
+{
+  "nodes": [
+    {"type": "Поле", "id": "1", "parent": null, "name": "Поле"},
+    
+    {"type": "Производство муки", "id": "pm", "parent": null, "name": "Производство муки"},
+    {"type": "Производство муки", "id": "2", "parent": "pm", "name": "Трактор"},
+    {"type": "Производство муки", "id": "3", "parent": "pm", "name": "Тракторист"},
+    {"type": "Производство муки", "id": "4", "parent": "pm", "name": "Дизиль"},
+    {"type": "Производство муки", "id": "5", "parent": "pm", "name": "Мельница"},
+    {"type": "Производство муки", "id": "6", "parent": "pm", "name": "Мельник"},
+    {"type": "Мука", "id": "7", "parent": null, "name": "Мука"},
+    
+    //{"type": "Отдельно", "id": "8", "parent": null, "name": "Отдельно"}
+  ],
+  
+  "links": [
+    //{"source": 1, "target": 3, "value": 100},
+    {"source": 3, "target": 2, "value": 100},
+    {"source": 4, "target": 2, "value": 100},
+    {"source": 6, "target": 5, "value": 100},
+    {"source": 2, "target": 5, "value": 100},
+    {"source": 1, "target": 2, "value": 100},
+    {"source": 5, "target": 7, "value": 100}
+  ]
+}
+
+var currentChain;
+
+function chains(chain)
 {
   var svg, tooltip, biHiSankey, path, defs, colorScale, highlightColorScale, isTransitioning;
+ 
+  if(chain)
+    currentChain = chain;
   
+  if(!currentChain)
+    currentChain = defaultChain;
+    
   // Remove previous rendered svg
   $("#chart").find("svg").remove();
   // Remove previous tooltips
@@ -508,19 +543,171 @@ function chains()
     collapser.exit().remove();
   }
   
-  var chainCopy = copyDefaultChainFromStorage();
+  var nodes = currentChain.nodes;
+  var links = currentChain.links;
   
   biHiSankey
-    .nodes(chainCopy.nodes)
-    .links(chainCopy.links)
+    .nodes(nodes)
+    .links(links)
     .initializeNodes(function (node) {
       node.state = node.parent ? "contained" : "collapsed";
     })
     .layout(LAYOUT_INTERATIONS);
-  
+    
   disableUserInterractions(2 * TRANSITION_DURATION);
   
   update();
 };
 
 window.onresize = chains();
+
+  /*
+  var exampleNodes = [
+    {"type": "Asset", "id": "a", "parent": null, "name": "Assets"},
+    {"type": "Asset", "id":1, "parent": "a", "number": "101", "name": "Cash"},
+    {"type": "Asset", "id":2, "parent": "a", "number": "120", "name": "Accounts Receivable"},
+    {"type": "Asset", "id":3, "parent": "a", "number": "140", "name": "Merchandise Inventory"},
+    {"type": "Asset", "id":4, "parent": "a", "number": "150", "name": "Supplies"},
+    {"type": "Asset", "id":5, "parent": "a", "number": "160", "name": "Prepaid Insurance"},
+    {"type": "Asset", "id":6, "parent": "a", "number": "170", "name": "Land"},
+    {"type": "Asset", "id":7, "parent": "a", "number": "175", "name": "Buildings"},
+    {"type": "Asset", "id":8, "parent": "a", "number": "178", "name": "Acc. Depreciation Buildings"},
+    {"type": "Asset", "id":9, "parent": "a", "number": "180", "name": "Equipment"},
+    {"type": "Asset", "id":10, "parent": "a", "number": "188", "name": "Acc. Depreciation Equipment"},
+    {"type": "Liability", "id": "l", "parent": null, "number": "l", "name": "Liabilities"},
+    {"type": "Liability", "id":11, "parent": "l", "number": "210", "name": "Notes Payable"},
+    {"type": "Liability", "id":12, "parent": "l", "number": "215", "name": "Accounts Payable"},
+    {"type": "Liability", "id":13, "parent": "l", "number": "220", "name": "Wages Payable"},
+    {"type": "Liability", "id":14, "parent": "l", "number": "230", "name": "Interest Payable"},
+    {"type": "Liability", "id":15, "parent": "l", "number": "240", "name": "Unearned Revenues"},
+    {"type": "Liability", "id":16, "parent": "l", "number": "250", "name": "Mortage Loan Payable"},
+    {"type": "Equity", "id": "eq", "parent": null, "number": "eq", "name": "Equity"},
+    {"type": "Revenue", "id": "r", "parent": null, "number": "r", "name": "Revenues"},
+    {"type": "Revenue", "id": "or", "parent": "r", "number": "", "name": "Operating Revenue"},
+    {"type": "Revenue", "id":17, "parent": "or", "number": "310", "name": "Service Revenues"},
+    {"type": "Revenue", "id": "nor", "parent": "r", "number": "", "name": "Non-Operating Revenue"},
+    {"type": "Revenue", "id":18, "parent": "nor", "number": "810", "name": "Interest Revenues"},
+    {"type": "Revenue", "id":19, "parent": "nor", "number": "910", "name": "Asset Sale Gain"},
+    {"type": "Revenue", "id":20, "parent": "nor", "number": "960", "name": "Asset Sale Loss"},
+    {"type": "Expense", "id": "ex", "parent": null, "number": "ex", "name": "Expenses"},
+    {"type": "Expense", "id":21, "parent": "ex", "number": "500", "name": "Salaries Expense"},
+    {"type": "Expense", "id":22, "parent": "ex", "number": "510", "name": "Wages Expense"},
+    {"type": "Expense", "id":23, "parent": "ex", "number": "540", "name": "Supplies Expense"},
+    {"type": "Expense", "id":24, "parent": "ex", "number": "560", "name": "Rent Expense"},
+    {"type": "Expense", "id":25, "parent": "ex", "number": "570", "name": "Utilities Expense"},
+    {"type": "Expense", "id":26, "parent": "ex", "number": "576", "name": "Telephone Expense"},
+    {"type": "Expense", "id":27, "parent": "ex", "number": "610", "name": "Advertising Expense"},
+    {"type": "Expense", "id":28, "parent": "ex", "number": "750", "name": "Depreciation Expense"}
+  ]
+  
+  var exampleLinks = [
+    {"source":8, "target":28, "value":Math.floor(Math.random() * 100)},
+    {"source":17, "target":18, "value":Math.floor(Math.random() * 100)},
+    {"source":22, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":3, "target":13, "value":Math.floor(Math.random() * 100)},
+    {"source":24, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":5, "target":4, "value":Math.floor(Math.random() * 100)},
+    {"source":15, "target":5, "value":Math.floor(Math.random() * 100)},
+    {"source":18, "target":8, "value":Math.floor(Math.random() * 100)},
+    {"source":3, "target":20, "value":Math.floor(Math.random() * 100)},
+    {"source":17, "target":18, "value":Math.floor(Math.random() * 100)},
+    {"source":22, "target":5, "value":Math.floor(Math.random() * 100)},
+    {"source":4, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":26, "target":16, "value":Math.floor(Math.random() * 100)},
+    {"source":27, "target":6, "value":Math.floor(Math.random() * 100)},
+    {"source":23, "target":4, "value":Math.floor(Math.random() * 100)},
+    {"source":10, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":17, "target":16, "value":Math.floor(Math.random() * 100)},
+    {"source":5, "target":12, "value":Math.floor(Math.random() * 100)},
+    {"source":12, "target":16, "value":Math.floor(Math.random() * 100)},
+    {"source":19, "target":5, "value":Math.floor(Math.random() * 100)},
+    {"source":15, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":27, "target":2, "value":Math.floor(Math.random() * 100)},
+    {"source":26, "target":28, "value":Math.floor(Math.random() * 100)},
+    {"source":22, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":3, "target":18, "value":Math.floor(Math.random() * 100)},
+    {"source":18, "target":5, "value":Math.floor(Math.random() * 100)},
+    {"source":25, "target":28, "value":Math.floor(Math.random() * 100)},
+    {"source":12, "target":1, "value":Math.floor(Math.random() * 100)},
+    {"source":28, "target":21, "value":Math.floor(Math.random() * 100)},
+    {"source":9, "target":16, "value":Math.floor(Math.random() * 100)},
+    {"source":14, "target":23, "value":Math.floor(Math.random() * 100)},
+    {"source":6, "target":1, "value":Math.floor(Math.random() * 100)},
+    {"source":9, "target":15, "value":Math.floor(Math.random() * 100)},
+    {"source":16, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":22, "target":28, "value":Math.floor(Math.random() * 100)},
+    {"source":8, "target":21, "value":Math.floor(Math.random() * 100)},
+    {"source":22, "target":7, "value":Math.floor(Math.random() * 100)},
+    {"source":18, "target":10, "value":Math.floor(Math.random() * 100)},
+    {"source": "eq", "target":1, "value":Math.floor(Math.random() * 100)},
+    {"source":1, "target":21, "value":Math.floor(Math.random() * 100)},
+    {"source":1, "target":24, "value":Math.floor(Math.random() * 100)},
+    {"source":17, "target":1, "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)},
+    {"source":Math.ceil(Math.random() * 28), "target":Math.ceil(Math.random() * 28), "value":Math.floor(Math.random() * 100)}
+  ]*/
+
+  
+  /*
+  var exampleNodes = [
+    {"type": "Планета Земля", "id": "1", "parent": null, "name": "Планета Земля"},
+    {"type": "Ресурсы планеты", "id": "pm", "parent": null, "name": "Ресурсы планеты"},
+      {"type": "Ресурсы планеты", "id": "nei", "parent": "pm", "name": "Неисчерпаемые"},
+        {"type": "Ресурсы планеты", "id": "3", "parent": "nei", "name": "Неисчерпаемые"},
+        {"type": "Ресурсы планеты", "id": "18", "parent": "nei", "name": "Воды мирового океана"},
+        {"type": "Ресурсы планеты", "id": "19", "parent": "nei", "name": "Атмосферный воздух"},
+        {"type": "Ресурсы планеты", "id": "20", "parent": "nei", "name": "Энергия земных недр"},
+        {"type": "Ресурсы планеты", "id": "21", "parent": "nei", "name": "Энергия ветра"},
+        {"type": "Ресурсы планеты", "id": "22", "parent": "nei", "name": "Энергия морских приливов и отливов"},
+        {"type": "Ресурсы планеты", "id": "23", "parent": "nei", "name": "Солнечная энергия"},
+      {"type": "Ресурсы планеты", "id": "is", "parent": "pm", "name": "Исчерпаемые"},
+        {"type": "Ресурсы планеты", "id": "2", "parent": "is", "name": "Исчерпаемые"},
+        {"type": "Ресурсы планеты", "id": "pmn", "parent": "is", "name": "Невозобновимые"},
+          {"type": "Ресурсы планеты", "id": "10", "parent": "pmn", "name": "Невозобновимые"},
+          {"type": "Ресурсы планеты", "id": "8", "parent": "pmn", "name": "Полезные ископаемые"},
+          {"type": "Ресурсы планеты", "id": "9", "parent": "pmn", "name": "Руда"},
+        {"type": "Ресурсы планеты", "id": "pmv", "parent": "is", "name": "Относительно возобновимые"},
+          {"type": "Ресурсы планеты", "id": "11", "parent": "pmv", "name": "Относительно возобновимые"},
+          {"type": "Ресурсы планеты", "id": "12", "parent": "pmv", "name": "Лесные ресурсы"},
+          {"type": "Ресурсы планеты", "id": "13", "parent": "pmv", "name": "Плодородные почвы"},
+          {"type": "Ресурсы планеты", "id": "14", "parent": "pmv", "name": "Некоторые виды минерального сырья"},
+        {"type": "Ресурсы планеты", "id": "voz", "parent": "is", "name": "Возобновимые"},
+          {"type": "Ресурсы планеты", "id": "6", "parent": "voz", "name": "Возобновимые"},
+          {"type": "Ресурсы планеты", "id": "15", "parent": "voz", "name": "Ростительный мир"},
+          {"type": "Ресурсы планеты", "id": "16", "parent": "voz", "name": "Животный мир"},
+          {"type": "Ресурсы планеты", "id": "17", "parent": "voz", "name": "Пресная вода"},
+
+    {"type": "Космос", "id": "7", "parent": null, "name": "Колонизация космоса"},
+  ]
+  
+  var exampleLinks = [
+    {"source":1, "target":2,  "value":100},
+    {"source":1, "target":3, "value": 100},
+    {"source":2, "target":10, "value":100},
+    {"source":2, "target":11, "value": 100},
+    {"source":2, "target":6, "value": 100},
+    {"source":1, "target":7, "value": 100},
+    {"source":10, "target":8, "value":100},
+    {"source":8, "target":9, "value": 100},
+    {"source":11, "target":12,  "value":100},
+    {"source":11, "target":13,  "value":100},
+    {"source":11, "target":14,  "value":100},
+    {"source":6, "target":15,  "value":100},
+    {"source":6, "target":16,  "value":100},
+    {"source":6, "target":17,  "value":100},
+    {"source":3, "target":18,  "value":100},
+    {"source":3, "target":19,  "value":100},
+    {"source":3, "target":20,  "value":100},
+    {"source":3, "target":21,  "value":100},
+    {"source":3, "target":22,  "value":100},
+    {"source":3, "target":23,  "value":100},
+  ]*/
+
