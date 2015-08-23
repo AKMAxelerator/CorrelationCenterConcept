@@ -18,6 +18,7 @@
         
         <style type="text/css">
           body { overflow: hidden; }
+          iframe { border: 0px; }
         </style>
 
         <script src="underscore-min.js"></script>
@@ -73,7 +74,7 @@
             
             function getSectionHeight()
             {
-              return $(window).height() - $(".navbar").outerHeight(true) - 11; // 11 - is hack for chrome
+              return $(window).height() - $(".navbar").outerHeight(true);
             }
             
             function getSectionWidth()
@@ -121,40 +122,23 @@
 
         </div>
         <div id="jsoneditor" class="section hidden">
+          <!--
           <div id="json-editor-container"></div>
           
-          <!-- <div class="row">
+          <div class="row">
             <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="left-json-editor-container"></div>
             <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6" id="right-json-editor-container"></div>
-          </div> -->
+          </div> 
+          
+          <script src="editor.js"></script> 
+          -->
+          
+          <iframe id="json-editor-container" height="100px" width="100px" src="editor.html"></iframe>
           <script>
-            var editor;
-          
-            var options = {
-              mode: 'tree',
-              modes: ['tree', 'form', 'view', 'text'], // allowed modes ('code' не работает, разобраться, почему)
-              error: function (err) { console.dir(err); },
-              change: function () {
-                json = editor.get(json);
-                copyDefaultChainToChain(json);
-              }
-            };
-          
-            //var leftContainer = document.getElementById('left-json-editor-container');
-            //var rightContainer = document.getElementById('right-json-editor-container');
-            var container = document.getElementById('json-editor-container');
-            
-            $(container).css("background-color", "#FFFFFF");
-            $(container).css("width", getSectionWidth());
-            $(container).css("height", getSectionHeight());
-          
-            var json = copyDefaultChainFromStorage();
-          
-            //var leftEditor = new JSONEditor(leftContainer, options, json);
-            //var rightEditor = new JSONEditor(rightContainer, options, json);
-            editor = new JSONEditor(container, options, json);
+            var container = $('#json-editor-container');
+            container.css("width", getSectionWidth());
+            container.css("height", getSectionHeight());
           </script>
-          
         </div>
         <!-- Site sections -->
     </body>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        
+        <link rel="stylesheet" href="jsoneditor/jsoneditor.css">
+        
+        <style type="text/css">
+          html { height: 100%; }
+          body { padding: 0px; margin: 0px; overflow: hidden; height: 100%; }
+          .root { height: 100%; }
+        </style>
+
+        <script src="underscore-min.js"></script>
+        <script src="jquery-2.1.4.min.js"></script>
+        <script src="jsoneditor/jsoneditor.js"></script>
+        
+        <script src="storage.js"></script>
+
+        <script type="text/javascript">
+            $(function() {
+                $(window).resize(function() {
+                    var container = $('#json-editor-container');
+                    container.css("width", getSectionWidth());
+                    container.css("height", getSectionHeight());
+                });
+            });
+        
+            function getSectionHeight() { return $(window).height(); }
+            function getSectionWidth() { return $(window).width(); }
+        </script>
+    </head>
+    <body>
+        <div class="root">
+            <div id="json-editor-container"></div>
+            <script src="editor.js"></script>
+        </div>
+    </body>
+</html>
