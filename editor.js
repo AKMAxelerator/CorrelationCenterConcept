@@ -7,7 +7,7 @@ var editorJSONToSet = "";
 
 var options = {
   mode: 'tree',
-  modes: ['tree', 'text', 'code'], // allowed modes ('code' не работает, разобраться, почему)
+  modes: ['tree', 'form', 'view', 'text', 'code'], // allowed modes ('code' не работает, разобраться, почему)
   error: function (error) { console.dir(error); },
   change: function () {
     try {
