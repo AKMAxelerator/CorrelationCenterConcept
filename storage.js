@@ -8,7 +8,7 @@ var defaultChainItemName = "0";
       {"id": "pm", "parent": null, "type": "Производственный процесс", "name": "Производство муки"},
       {"id": "2", "parent": "pm", "type": "Транспорт", "name": "Трактор"},
       {"id": "3", "parent": "pm", "type": "Исполнитель", "name": "Тракторист"},
-      {"id": "4", "parent": "pm", "type": "Энергоноситель", "name": "Дизиль"},
+      {"id": "4", "parent": "pm", "type": "Энергоноситель", "name": "Дизель"},
       {"id": "5", "parent": "pm", "type": "Строение", "name": "Мельница"},
       {"id": "6", "parent": "pm", "type": "Исполнитель", "name": "Мельник"},
       

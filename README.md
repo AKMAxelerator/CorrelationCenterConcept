@@ -71,3 +71,65 @@
 
 - Рефакторинг, упрощение, оптимизация исходного кода.
 - Завершение версии, публичное обсуждение среди кооператоров.
+
+
+# Roadmap
+
+## Space-time (unique and complete basic coordinate of Resources and Events)
+- Space (solar system) page link
+- Sun page link
+- Earth page link
+- Moon page link
+- Mars time
+- 3D model (switch to 2D back will be always available, 1D is just reqular line of text, for example: 2015-08-24 22:22)
+- Realistic proportions
+https://en.wikipedia.org/wiki/Opposition_(planets)
+https://ru.wikipedia.org/wiki/%D0%9F%D1%80%D0%BE%D1%82%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D0%BE%D1%8F%D0%BD%D0%B8%D0%B5_%D0%BF%D0%BB%D0%B0%D0%BD%D0%B5%D1%82%D1%8B
+
+## Measurement System setting
+
+## Directionality setting (visual data flow direction), that affects:
+- Menu position
+- Links (arrows) direction
+- Sequence flow direction
+- Time flow direction
+- Graph flow direction
+- Text flow direction (left to right, right to left, etc)
+- etc
+https://en.wikipedia.org/wiki/Writing_system#Directionality
+https://en.wikipedia.org/wiki/Right-to-left
+
+## Language setting
+- Multilanguage support (legacy, only while the transition to the Venus Project)
+  + English
+  + Russian
+  + etc
+- Universal language (not designed yet)
+
+## Resources/Enviroment/State
+- Meta-resources (information): classes, categories, types, etc.
+- Real-resources (actual physical objects): matter, forces, energy, etc.
+
+## Events/Changes/Transitions/Log/History/Actions
+- Past events
+- Events registration (manual and automatic)
+- Events proof
+- Registration of "supply and demand", "possible alternatives and requirements", "existed and have to be existed", reason of change in "supply and demand" is a change of enviroment. Any change or transition is event.
+- Event access levels
+- Public access through API
+
+## Process/Multichain/Transitions plan/Algorithms/Resources flow
+- Add support for multiple chains.
+- Search resources for chain.
+- Global chain map
+- Gantt diagram
+- Events planning
+- BetterMeans integration
+
+## API
+- Protocol
+- Access levels (user, groups, roles, etc)
+
+## Tests
+- Browsers
+- Real world manufacture
