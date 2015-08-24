@@ -118,7 +118,12 @@ https://en.wikipedia.org/wiki/Right-to-left
 - Event access levels
 - Public access through API
 
-## Process/Multichain/Transitions plan/Algorithms/Resources flow
+## Chain/Algorithm
+- Alternative visualizations
+- Alternative editors
+- Visualizations with editor capability
+
+## Processes/Multichain/Transitions plan/Algorithms/Resources flow
 - Add support for multiple chains.
 - Search resources for chain.
 - Global chain map
