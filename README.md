@@ -7,6 +7,15 @@
 > Всё - ресурсы, любой объект - ресурс, любой объект - точка. Но в абсолюте всё: ресурсы, объекты, точки - есть связи.
 
 
+> [![IMAGE ALT TEXT](http://img.youtube.com/vi/gJQTFhkhwPA/0.jpg)](http://www.youtube.com/watch?v=gJQTFhkhwPA "Turing Machines")
+
+
+> [![IMAGE ALT TEXT](http://img.youtube.com/vi/s8Zlnd_NExs/0.jpg)](http://www.youtube.com/watch?v=s8Zlnd_NExs "Алгоритм изобретения")
+
+
+> [![IMAGE ALT TEXT](http://img.youtube.com/vi/rien66JuLsA/0.jpg)](http://www.youtube.com/watch?v=rien66JuLsA "Сетевое планирование и управление")
+
+
 
 Группа во ВКонтакте: https://vk.com/correlationcenter
 
