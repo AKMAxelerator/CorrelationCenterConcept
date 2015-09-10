@@ -147,3 +147,7 @@ https://en.wikipedia.org/wiki/Right-to-left
 ## Tests
 - Browsers
 - Real world manufacture
+
+
+> Support development (поддержать разработку) / donations (пожертвования):
+> 3MXvFfEGWM9nzVKZQHgVL7ioqSsHeAFpdP (bitcoin address of project coordinator | биткоин адрес координатора проекта)
