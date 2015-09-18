@@ -2,6 +2,7 @@ d3.biHiSankey = function () {
   "use strict";
 
   var biHiSankey = {},
+    nodeMinHeight = 24,
     nodeWidth = 24,
     nodeSpacing = 8,
     linkSpacing = 5,
@@ -197,9 +198,15 @@ d3.biHiSankey = function () {
   }
 
   function nodeHeight(sideLinks) {
-    var spacing = Math.max(sideLinks.length - 1, 0) * linkSpacing,
-        scaledValueSum = d3.sum(sideLinks, value) * yScaleFactor;
-    return scaledValueSum + spacing;
+    var spacing = Math.max(sideLinks.length - 1, 0) * linkSpacing;
+    var linksValueSum = sideLinks.length ? d3.sum(sideLinks, value) : 0;
+    var scaledValueSum = linksValueSum * yScaleFactor;
+    var resultHeight = scaledValueSum + spacing;
+    
+    if(isNaN(resultHeight) || resultHeight < nodeMinHeight)
+       resultHeight = nodeMinHeight;
+    
+    return resultHeight;
   }
 
   // Compute the value of each node by summing the associated links.
@@ -269,11 +276,13 @@ d3.biHiSankey = function () {
   function scaleNodeXPositions() {
     var minX = d3.min(nodes, function (node) { return node.x; }),
         maxX = d3.max(nodes, function (node) { return node.x; }) - minX;
-    xScaleFactor = (size[0] - nodeWidth) / maxX;
-
-    nodes.forEach(function (node) {
-      node.x *= xScaleFactor;
-    });
+    if(maxX) {
+      xScaleFactor = (size[0] - nodeWidth) / maxX;
+  
+      nodes.forEach(function (node) {
+        node.x *= xScaleFactor;
+      });
+    }
   }
 
   function computeNodeXPositions() {
