@@ -41,10 +41,10 @@
 + Добавлен favicon.ico
 + Реализовано редактирование одной локальной производственной цепочки с использованием https://github.com/josdejong/jsoneditor ( http://www.jsoneditoronline.org/ )
 + Решить проблему с конфликтами названий css классов json editor и bootstrap (использование iframe помогло).
++ Разрешить отображение отдельных элементов, для которых ещё нет связей, чтобы поддержать процесс редактирования непосредственно на визуализации.
     
 ## В разработке:
 
-- Разрешить отображение отдельных элементов, для которых ещё нет связей, чтобы поддержать процесс редактирования непосредственно на визуализации.
 - Заменить двойной щелчёк по группе - щелчком по квадратику и ещё одним щелчком по кружочку (без фона, только граница), чтобы раскрыть группу.
 - Реализовать масштабирование диаграммы по всей ширине экрана и высоте экрана.
 - Реализовать Zoom скроллом и жестами на мобильниках (можно применить em или другой вид изменяемых базовых единиц).
@@ -115,11 +115,11 @@ https://en.wikipedia.org/wiki/Right-to-left
   + etc
 - Universal language (not designed yet)
 
-## Resources/Enviroment/State
+## Resources/Enviroment/State (Anything that seems unchanging, stable)
 - Meta-resources (information): classes, categories, types, etc.
 - Real-resources (actual physical objects): matter, forces, energy, etc.
 
-## Events/Changes/Transitions/Log/History/Actions
+## Events/Changes/Transitions/Log/History/Actions (Every fact, the record of any change)
 - Past events
 - Events registration (manual and automatic)
 - Events proof
@@ -127,12 +127,12 @@ https://en.wikipedia.org/wiki/Right-to-left
 - Event access levels
 - Public access through API
 
-## Chain/Algorithm
+## Chain/Algorithm/Technology (Every transition that can applied on demand)
 - Alternative visualizations
 - Alternative editors
 - Visualizations with editor capability
 
-## Processes/Multichain/Transitions plan/Algorithms/Resources flow
+## Chains/Algorithms/Technologies/Processes/Transitions plan/Resources flow (Everything that builds up the ecosystem)
 - Add support for multiple chains.
 - Search resources for chain.
 - Global chain map
@@ -140,11 +140,11 @@ https://en.wikipedia.org/wiki/Right-to-left
 - Events planning
 - BetterMeans integration
 
-## API
+## API (Communication between systems)
 - Protocol
 - Access levels (user, groups, roles, etc)
 
-## Tests
+## Tests (System usage, application, quality)
 - Browsers
 - Real world manufacture
 
