@@ -415,7 +415,6 @@ function chains()
     // allow nodes to be dragged to new positions
     node.call(d3.behavior.drag()
       .origin(function (d) { return d; })
-      .on("dragstart", function () { this.parentNode.appendChild(this); })
       .on("drag", dragmove));
   
     // add in the text for the nodes
